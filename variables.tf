@@ -83,3 +83,4 @@ variable "redis_replicas_per_node_group" {
   description = "Redis setting for number of replicas per node group (string)"
   default     = "1"
 }
+
