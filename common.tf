@@ -48,11 +48,8 @@ resource "aws_route53_record" "elasticache" {
   name    = "elasticache-${var.purpose}"
   type    = "CNAME"
   ttl     = var.dns_record_ttl
-  records = element(
-    coalescelist(
-      aws_elasticache_cluster.memcached.*.cluster_address,
-      aws_elasticache_replication_group.redis.*.configuration_endpoint_address,
-    ),
-    0,
+  records = coalescelist(
+    aws_elasticache_cluster.memcached.*.cluster_address,
+    aws_elasticache_replication_group.redis.*.configuration_endpoint_address,
   )
 }
